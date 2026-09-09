@@ -7,11 +7,7 @@ from datetime import datetime
 # 0. 설정 및 구글 시트 Webhook URL
 # -------------------------------------------------------------
 
-try:
-    GAS_WEBHOOK_URL = st.secrets["GAS_WEBHOOK_URL"]
-except Exception:
-    GAS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzAe-1XOhvHYqcPyIqcjLwCp9i9K3tvKYum33xVaBVZvQbXTW1rGBTe1YCeOwhKZk7C/exec"
-
+GAS_WEBHOOK_URL = st.secrets["GAS_WEBHOOK_URL"]
 st.set_page_config(
     page_title="블라인드C 블스터디 조 선정",
     page_icon="👥",
