@@ -29,6 +29,7 @@ if "is_admin" not in st.session_state:
 # -------------------------------------------------------------
 # 1. API 통신 헬퍼 함수
 # -------------------------------------------------------------
+@st.cache_data(ttl=60)
 def fetch_data():
     """구글 시트에서 전체 데이터 가져오기"""
     try:
@@ -307,6 +308,7 @@ else:
                         "selected_slot": st.session_state.selected_slot
                     }
                     if post_action(payload):
+                        st.cache_data.clear()
                         st.success(f"🎉 '{st.session_state.selected_slot}' 시간대로 제출되었습니다!")
                     else:
                         st.error("제출에 실패했습니다. 다시 시도해 주세요.")
@@ -336,6 +338,7 @@ else:
                             "message": req_msg.strip()
                         })
                         if success:
+                            st.cache_data.clear()
                             st.success("관리자에게 메시지가 전송되었습니다!")
                             st.session_state.show_request_form = False
                     else:
