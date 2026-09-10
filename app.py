@@ -302,6 +302,7 @@ else:
                     payload = {
                         "action": "submit_slot",
                         "name": user["name"],
+                        "major" : user["major"],
                         "grade": user["grade"],
                         "student_id": user["student_id"],
                         "selected_slot": st.session_state.selected_slot
