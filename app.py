@@ -68,6 +68,7 @@ if not st.session_state.logged_in:
     with col2:
         with st.form("login_form"):
             name = st.text_input("이름", placeholder="이름을 입력하세요")
+            major = st.text_input("전공", placeholder="아융 혹은 전자로 입력하세요")
             grade = st.text_input("학년", placeholder="숫자만 입력하세요")
             student_id = st.text_input("학번", placeholder="예: 20260000(8자리)")
             
@@ -76,14 +77,15 @@ if not st.session_state.logged_in:
             if submit_button:
                 # 공백 제거
                 name_clean = name.strip()
+                major_clean = major.strip()
                 grade_clean = grade.strip()
                 id_clean = student_id.strip()
 
-                if not name_clean or not grade_clean or not id_clean:
-                    st.warning("이름, 학년, 학번을 모두 입력해주세요.")
+                if not name_clean or not major_clear or not grade_clean or not id_clean:
+                    st.warning("이름, 전공, 학년, 학번을 모두 입력해주세요.")
                 else:
-                    # 관리자 조건 확인: 이름="나는야임원진", 학년="n", 학번="00000000"
-                    if name_clean == "나는야임원진" and grade_clean == "n" and id_clean == "00000000":
+                    # 관리자 조건 확인: 이름="나는야임원진", 전공="공통", 학년="n", 학번="00000000"
+                    if name_clean == "나는야임원진" and major_clean =="공통" and grade_clean == "n" and id_clean == "00000000":
                         st.session_state.is_admin = True
                     else:
                         st.session_state.is_admin = False
@@ -91,6 +93,7 @@ if not st.session_state.logged_in:
                     st.session_state.logged_in = True
                     st.session_state.user_info = {
                         "name": name_clean,
+                        "major": major_clean,
                         "grade": grade_clean,
                         "student_id": id_clean
                     }
@@ -143,7 +146,7 @@ elif st.session_state.is_admin:
                 if selected_filter != "전체":
                     filtered_df = submissions[submissions["선택시간"] == selected_filter]
                     st.write(f"**[{selected_filter}] 신청자 ({len(filtered_df)}명)**")
-                    st.dataframe(filtered_df[["이름", "학년", "학번", "제출일시"]], use_container_width=True)
+                    st.dataframe(filtered_df[["이름", "전공", "학년", "학번", "제출일시"]], use_container_width=True)
             else:
                 st.info("아직 제출된 신청 내역이 없습니다.")
 
