@@ -81,7 +81,7 @@ if not st.session_state.logged_in:
                 grade_clean = grade.strip()
                 id_clean = student_id.strip()
 
-                if not name_clean or not major_clear or not grade_clean or not id_clean:
+                if not name_clean or not major_clean or not grade_clean or not id_clean:
                     st.warning("이름, 전공, 학년, 학번을 모두 입력해주세요.")
                 else:
                     # 관리자 조건 확인: 이름="나는야임원진", 전공="공통", 학년="n", 학번="00000000"
